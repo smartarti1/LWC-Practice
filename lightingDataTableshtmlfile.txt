@@ -1,0 +1,145 @@
+<template>
+    <div style="height: 300px;">
+        <lightning-datatable
+                key-field="id"
+                data={accountList}
+                show-row-number-column
+                row-number-offset={rowOffset}
+                hide-checkbox-column
+                columns={columns}>
+        </lightning-datatable>
+    </div>
+    <br><br>
+
+    <div style="height: 300px;">
+        <lightning-datatable 
+            data={wireContact.data} 
+            columns={columns1} 
+            key-field="id" 
+            hide-checkbox-column="true"  
+            onrowaction={handleRowAction}>
+        </lightning-datatable>
+
+        <template if:true={modalContainer}>
+            <section  class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModalAction}>
+                           <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small" ></lightning-icon>
+                        </button>
+                        <h2 class="slds-text-heading_medium slds-hyphenate">Contact Record Detail</h2>
+                     </header>
+
+                     <div class="slds-modal__content slds-p-around_medium">
+                        <table class="slds-table slds-table_bordered slds-table_col-bordered slds-table_cell-buffer">
+                           <thead> 
+                            <tr>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email Name</th>
+                                <th>Phone Name</th>
+                            </tr>
+                        </thead>
+                        <tbody> 
+                            <tr>
+                                <td>{contactRow.FirstName}</td>
+                                <td>{contactRow.LastName}</td>
+                                <td>{contactRow.Email}</td>
+                                <td>{contactRow.Phone}</td>
+                            </tr>
+                        </tbody>   
+                        </table>
+                     </div>
+                     <footer class="slds-modal__footer">
+                        <lightning-button variant="brand" label="Close" title="Close"  onclick={closeModalAction}></lightning-button>
+                   </footer> 
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+        
+    </div>
+    <br><br>
+    
+    <div>
+       <!-- <video autoplay>
+            <source src={videoUrl} type={videoType} />
+        </video> -->
+        <c-lightning-data-tables-child video-url={video}></c-lightning-data-tables-child>
+        
+        <button onclick={handlePlay} >Play</button>
+        <button onclick={handlePause} >Pause</button> 
+        
+    </div>
+    
+    <br><br>
+
+
+    <div>
+        <lightning-card title="ToastNotifications Demo">
+            <lightning-button variant="brand" label="SuccessToast" onclick={successtoastHandler} style="margin-left: 20px;"></lightning-button>
+            <lightning-button variant="brand" label="ErrorToast" onclick={errortoastHandler} style="margin-left: 20px;"></lightning-button>
+            <lightning-button variant="brand" label="WarningToast" onclick={warningtoastHandler} style="margin-left: 20px;"></lightning-button>
+            <lightning-button variant="brand" label="InfoToast" onclick={infotoastHandler} style="margin-left: 20px;"></lightning-button>
+        </lightning-card>
+    </div>
+    <br><br>
+
+    <lightning-progress-indicator current-step={currentStep} type="base" variant="base">
+        <lightning-progress-step label="Step 1" value="1" onclick={handleOnStepClick}></lightning-progress-step>
+        <lightning-progress-step label="Step 2" value="2" onclick={handleOnStepClick}></lightning-progress-step>
+        <lightning-progress-step label="Step 3" value="3" onclick={handleOnStepClick}></lightning-progress-step>
+    </lightning-progress-indicator>
+     
+    <template if:true={isStepOne}>
+        <div>
+            Step 1
+        </div>
+    </template>
+    <template if:true={isStepTwo}>
+        <div>
+            Step 2
+        </div>
+    </template>
+    <template if:true={isStepThree}>
+        <div>
+            Step 3
+        </div>
+    </template>
+     
+    <template if:true={isEnablePrev}>
+        <lightning-button variant="base" label="Back" onclick={handlePrev}></lightning-button>
+    </template>
+     
+    <template if:true={isEnableNext}>
+        <lightning-button label="Next" variant="brand" onclick={handleNext}></lightning-button>
+    </template>
+    <template if:true={isEnableFinish}>
+        <lightning-button label="Finish" variant="brand" onclick={handleFinish}></lightning-button>
+    </template>
+
+    <br>
+    <br>
+<!--
+        <lightning-card>
+            <div style="border:1px #000000 solid; padding:10px; background:#dfbe06; margin:40px 0;">
+                    
+                <p>Parent Component</p>   
+                <lightning-tile label='Parent Bar Component'>
+                    <lightning-progress-ring value={barVal} size="large"></lightning-progress-ring>
+                </lightning-tile>
+                <c-lightning-data-tables-child oncallpasstoparent={passToParent}></c-lightning-data-tables-child>
+              
+            </div>
+           
+         
+        </lightning-card>
+     -->   
+
+</template>
+
+ 
+
+    
+
+
